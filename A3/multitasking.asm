@@ -108,7 +108,7 @@ loop_1:
 	li s0,0x5B
 	sb s0,0(s1)
 	li s0,0x4F
-	sb s0,0(s1)
+	sb s0,0(s1)	
 	j loop_1
 	
 # ---------------------------------------
@@ -129,16 +129,17 @@ loop_2:
 # ---------------------------------------
 	
 process_3:
-	la s1,pixelArray
-	li s3 0x10000000
-	li s2 0x10000041
+	la s0,pixelArray
+	li s1 0x10000000
+	li s3 0x10000100
 loop_3:
-	li a7 
-	lw s0, 0(s1)
-	sw s3, 0(s0)
+	lw s2, 0(s0)
+	sw s2, 0(s1)
+	
 	addi s1, s1, 4
-	addi s3, s3, 4
-	beq  s3, s2,end
+	addi s0, s0, 4
+	
+	bgt s1, s3, end
 	j loop_3
 end: 
 		
@@ -206,7 +207,7 @@ trap_frame_2:
 	.word 0            # s1    (trap_frame + 8)
 	.word 0            # s2    (trap_frame + 12) 
 	.word 0            # s3    (trap_frame + 16) 
-	.word trap_frame_1 # next  (trap_frame + 20)
+	.word trap_frame_3 # next  (trap_frame + 20)
 trap_frame_3:
 	.word process_3    # pc    (trap_frame + 0)  - initialise to the starting address
 	.word 0            # s0    (trap_frame + 4)
