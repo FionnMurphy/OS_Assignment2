@@ -1,6 +1,7 @@
 # To run this program you need to open Digital Lab Sim tool
 # and connect it to simulation by clicking "Connect to Program"
                 
+# Fionn Murphy (21349726) and Sergio Jimenez (21710801)                
         .data 
 pixelArray:
 .word 0x2e77d0
